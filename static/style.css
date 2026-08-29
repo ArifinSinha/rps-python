@@ -165,3 +165,98 @@ h1{
 }
 .choice-btn:hover:not(:disabled){ transform:translateY(-3px); border-color:var(--gold); }
 .choice-btn:disabled{ opacity:0.45; cursor:default; }
+
+.choice-btn .icon svg,
+.hand svg{
+  width: 40px;
+  height: 40px;
+  display: block;
+  margin: 0 auto;
+}
+.choice-btn .icon{
+  display:block;
+  margin-bottom: 6px;
+}
+.choice-btn.rock .icon{ color: var(--stone); }
+.choice-btn.paper .icon{ color: var(--parchment); }
+.choice-btn.scissors .icon{ color: var(--rust); }
+
+.hand svg{ width: 48px; height: 48px; }
+
+.result-banner.pulse{
+  animation: bannerPulse 0.45s ease;
+}
+@keyframes bannerPulse{
+  0%   { transform: scale(1);   color: var(--text); }
+  40%  { transform: scale(1.15); color: var(--gold); }
+  100% { transform: scale(1);   color: var(--text); }
+}
+
+.bestof-row{
+  display:flex;
+  gap:8px;
+  justify-content:center;
+  margin-top:8px;
+}
+.bestof-btn{
+  background:var(--panel-2);
+  border:1px solid #3a2f24;
+  border-radius:8px;
+  padding:6px 12px;
+  color:var(--text-dim);
+  font-family:'Space Grotesk', sans-serif;
+  font-size:0.78rem;
+  cursor:pointer;
+}
+.bestof-btn.selected{
+  border-color:var(--gold);
+  color:var(--gold);
+}
+
+.match-over{
+  text-align:center;
+  background:var(--panel);
+  border:1px solid var(--gold);
+  border-radius:14px;
+  padding:20px;
+  margin-top:16px;
+}
+.match-over div{
+  font-family:'Bebas Neue', sans-serif;
+  font-size:1.6rem;
+  color:var(--gold);
+  margin-bottom:12px;
+}
+.match-over button{
+  background:var(--gold);
+  border:none;
+  border-radius:8px;
+  padding:8px 20px;
+  color:#1a1512;
+  font-weight:700;
+  cursor:pointer;
+}
+
+.history{
+  display:flex;
+  gap:6px;
+  justify-content:center;
+  flex-wrap:wrap;
+  margin-top:4px;
+  margin-bottom:16px;
+}
+.history .chip{
+  width:26px;
+  height:26px;
+  border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:0.7rem;
+  font-family:'Space Grotesk', sans-serif;
+  font-weight:700;
+  border:1px solid #3a2f24;
+}
+.chip.win{ background:rgba(232,163,61,0.15); border-color:var(--gold); color:var(--gold); }
+.chip.lose{ background:rgba(155,58,58,0.15); border-color:var(--crimson); color:var(--crimson); }
+.chip.draw{ background:rgba(156,146,132,0.15); border-color:var(--stone); color:var(--stone); }

@@ -17,6 +17,12 @@
       <input type="text" id="nameInput" placeholder="PlayerOne" maxlength="20">
       <button id="nameSubmit">Start</button>
     </div>
+    <label style="margin-top:14px;">Match length</label>
+    <div class="bestof-row">
+      <button class="bestof-btn selected" data-bestof="3">Best of 3</button>
+      <button class="bestof-btn" data-bestof="5">Best of 5</button>
+      <button class="bestof-btn" data-bestof="7">Best of 7</button>
+    </div>
   </div>
 
   <div id="gameArea" class="game-area" style="display:none;">
@@ -40,11 +46,22 @@
 
     <div id="resultBanner" class="result-banner">Pick your weapon</div>
     <div id="gameCount" class="game-count"></div>
+    <div id="history" class="history"></div>
+    <div id="matchOverBanner" class="match-over" style="display:none;">
+      <div id="matchOverText"></div>
+      <button id="newMatchBtn">New Match</button>
+    </div>
 
     <div class="choices">
-      <button class="choice-btn" data-choice="1">✊<br>ROCK</button>
-      <button class="choice-btn" data-choice="2">✋<br>PAPER</button>
-      <button class="choice-btn" data-choice="3">✌️<br>SCISSORS</button>
+      <button class="choice-btn rock" data-choice="1">
+        <span class="icon"></span>ROCK
+      </button>
+      <button class="choice-btn paper" data-choice="2">
+        <span class="icon"></span>PAPER
+      </button>
+      <button class="choice-btn scissors" data-choice="3">
+        <span class="icon"></span>SCISSORS
+      </button>
     </div>
   </div>
 </div>
