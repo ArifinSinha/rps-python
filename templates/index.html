@@ -2,7 +2,9 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Rock Paper Scissors</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RPS Arena · Rock Paper Scissors</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 64 64%22><text y=%2250%22 font-size=%2250%22>✊</text></svg>">
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
@@ -64,6 +66,8 @@
       </button>
     </div>
   </div>
+
+  <div class="footer">Built with Flask &amp; vanilla JavaScript</div>
 </div>
 
 <script src="{{ url_for('static', filename='script.js') }}"></script>
