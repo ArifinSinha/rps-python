@@ -32,7 +32,9 @@ newMatchBtn.addEventListener('click', async () => {
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ name: youLabel.textContent })
   });
+
   matchOverBanner.style.display = 'none';
+
   youScore.textContent = '0';
   cpuScore.textContent = '0';
   gameCount.textContent = '';
@@ -44,6 +46,13 @@ newMatchBtn.addEventListener('click', async () => {
   historyEl.innerHTML = '';
   busy = false;
   buttons.forEach(b => b.disabled = false);
+});
+
+document.addEventListener('keydown', (e) => {
+  if (gameArea.style.display === 'none') return;
+  if (e.key === '1') playRound('1');
+  if (e.key === '2') playRound('2');
+  if (e.key === '3') playRound('3');
 });
 
 // SVG icons instead of emoji - each uses currentColor so CSS controls the color
@@ -73,6 +82,20 @@ let audioCtx = null;
 function getAudioCtx() {
   if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
   return audioCtx;
+}
+
+function launchConfetti() {
+  const colors = ['#e8a33d', '#ecdfc4', '#c1440e'];
+  for (let i = 0; i < 60; i++) {
+    const piece = document.createElement('div');
+    piece.className = 'confetti-piece';
+    piece.style.left = Math.random() * 100 + 'vw';
+    piece.style.background = colors[Math.floor(Math.random() * colors.length)];
+    piece.style.animationDuration = (2 + Math.random() * 2) + 's';
+    piece.style.opacity = Math.random();
+    document.body.appendChild(piece);
+    setTimeout(() => piece.remove(), 4000);
+  }
 }
 
 function playTone(freq, duration, delay = 0, type = 'sine', volume = 0.15) {
@@ -137,6 +160,8 @@ async function startGame() {
   banner.textContent = `${data.name}, pick your weapon`;
   nameGate.style.display = 'none';
   gameArea.style.display = 'block';
+
+  localStorage.setItem('rps_name', data.name);
 }
 
 buttons.forEach(btn => {
@@ -198,14 +223,24 @@ async function playRound(choice) {
 
   const target = Math.ceil(bestOf / 2);
   if (data.player_wins >= target || data.python_wins >= target) {
-    const winnerText = data.player_wins >= target
+    const playerWonMatch = data.player_wins >= target;
+    const winnerText = playerWonMatch
       ? `🏆 ${youLabel.textContent} wins the match!`
       : `🏆 Python wins the match!`;
     matchOverText.textContent = winnerText;
     matchOverBanner.style.display = 'block';
     buttons.forEach(b => b.disabled = true);
+    if (playerWonMatch) launchConfetti();
   } else {
     busy = false;
     buttons.forEach(b => b.disabled = false);
   }
 }
+
+// on page load, check if a name was saved from a previous visit
+window.addEventListener('DOMContentLoaded', () => {
+  const savedName = localStorage.getItem('rps_name');
+  if (savedName) {
+    nameInput.value = savedName;
+  }
+});
